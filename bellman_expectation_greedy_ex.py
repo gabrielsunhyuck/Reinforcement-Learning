@@ -2,6 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
+'''
+정책 평가 :: 본 정책에서 "반복적 정책 평가" 방법론을 통해 각 그리드의 상태 가치를 계산하는 것
+정책 평가를 통해 각 상태의 밸류를 계산한다면, 정책 개선 단계로 넘어가게 된다.
+
+정책 평가를 통해 각 그리드의 상태 가치를 판별하고,
+최선의 정책을 사용할 수 있도록 그리디 정책을 활용하는 예시이다.
+'''
+
 # 그리드 맵 크기 설정
 rows = 4
 cols = 4
