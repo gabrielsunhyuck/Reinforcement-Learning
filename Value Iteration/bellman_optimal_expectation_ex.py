@@ -20,9 +20,9 @@ rows = 4
 cols = 4
 
 # 환경 변수
-reward = -1  # 한 칸 이동 시 보상
-gamma = 1.0  # 감쇠율
-theta = 1e-4 # 수렴을 위한 임계값
+reward = -1   # 한 칸 이동 시 보상
+gamma  = 1.0  # 감쇠율
+theta  = 1e-4 # 수렴을 위한 임계값
 
 # 초기 상태 가치 함수
 value_table = np.zeros((rows, cols), dtype=float)
@@ -30,10 +30,10 @@ frames = [] # 애니메이션 프레임을 저장할 리스트
 
 # ----------------- 가치 반복 (벨만 최적 방정식) -----------------
 while True:
-    delta = 0
+    delta            = 0 # 상태 가치 수렴성을 판단하는 파라미터 (초기값)
     temp_value_table = value_table.copy()
 
-    # 현재 상태 테이블을 애니메이션 프레임으로 저장
+    # 현재 상태 테이블을 애니메이션 프레임으로 저장 (copy는 원본 유지하는 기능)
     frames.append(temp_value_table.copy())
     
     for i in range(rows):
@@ -44,14 +44,17 @@ while True:
             v_old = value_table[i, j]
             
             # 벨만 최적 방정식: 모든 행동 중 최대 가치 찾기
-            max_value_for_state = -np.inf
+            # --> 현재 상태에서 취할 수 있는 모든 행동의 가치 중 최대값을 찾기 위한 변수
+            max_value_for_state = -np.inf 
             
             actions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
             
             for dr, dc in actions:
+                # 현재 그리드 위치에서 동, 서, 남, 북 방향 순회 (4가지 행동)
                 next_i, next_j = i + dr, j + dc
                 
                 if 0 <= next_i < rows and 0 <= next_j < cols:
+                    # 동, 서, 남, 북을 순회하여 상태 가치 계산
                     v_prime = value_table[next_i, next_j]
                 else:
                     v_prime = value_table[i, j]
@@ -60,10 +63,11 @@ while True:
                 q_value = reward + gamma * v_prime
                 
                 if q_value > max_value_for_state:
+                    # 동, 서, 남, 북으로 이동하는 모든 행동을 취했을 때, 가장 높은 상태-행동 가치를 선택하여 저장 
                     max_value_for_state = q_value
 
             # 상태 가치를 최대 Q-가치로 업데이트
-            new_value = max_value_for_state
+            new_value              = max_value_for_state
             temp_value_table[i, j] = new_value
 
             delta = max(delta, abs(v_old - new_value))
