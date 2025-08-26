@@ -3,6 +3,18 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.animation import FuncAnimation
 
+'''
+본 코드에서 정책은
+1) 한 칸 이동 시 보상 -1
+2) 동, 서, 남, 북 이동 확률 0.25
+3) 상태 전이 확률 100%
+4) 감쇠 인자 1.0
+
+벨만 최적 방정식을 통해 각 상태에서 계산한 모든 행동에 대한 상태 가치들 중 최적을 계산
+상태 가치가 수렴할 때까지 벨만 최적 방정식을 계산하다보면 최적의 상태 가치를 계산할 수 있음
+"MDP를 모두 아는 상황에서 최적의 밸류를 안다면 최적 정책을 아는 것과 마찬가지라고 볼 수 있다."
+'''
+
 # 그리드 맵 크기 설정
 rows = 4
 cols = 4
