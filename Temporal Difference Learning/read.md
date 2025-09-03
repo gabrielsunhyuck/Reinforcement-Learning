@@ -54,6 +54,6 @@ $$V(s_t) \leftarrow V(s_t) + \alpha [r_{t+1} + \gamma V(s_{t+1}) - V(s_t)]$$
 
 * **몬테카를로 방식**의 업데이트 식
 $[V(s_t) \leftarrow V(s_t) + \alpha (G_t - V(s_t))]$
-에서 **리턴$(G_t)$을** **시간차 타겟
+에서 **리턴 $(G_t)$ 을** **시간차 타겟
 $[r_{t+1} + \gamma V(s_{t+1})]$ 으로 대체**하여 계산합니다.
 ---
