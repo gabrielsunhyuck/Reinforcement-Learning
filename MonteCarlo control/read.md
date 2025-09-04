@@ -25,13 +25,8 @@ $$v_\pi(s)=\sum_{a \in A}\pi(a | s) [r_s^a+\gamma \sum_{s' \in S}P_{ss'}^a v_\pi
 ## 3. $\varepsilon-\text{greedy}$ 정책
 - $\varepsilon$이라는 작은 확률만큼 랜덤하게 액션을 선택
 - $1-\varepsilon$이라는 나머지 확률은 원래의 그리디 정책을 따름   
-$$
-\pi(a \mid s) =
-\begin{cases}
-1 - \varepsilon, & \text{if } a^{*} = \arg\max_{a} q(s,a) \\
-\varepsilon,     & \text{otherwise}
-\end{cases}
-$$
+
+   ![alt text](image.png)
 
 - $\varepsilon$의 값을 처음에는 높게 하다가 점점 줄여주는 방법
 
