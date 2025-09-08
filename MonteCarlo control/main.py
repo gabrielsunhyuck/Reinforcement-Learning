@@ -14,7 +14,7 @@ def main():
         s       = env.reset() # 에피소드가 끝나고 초기 상태로 되돌림 (재시작)
 
         while not done: # 에피소드 한 바퀴
-            # 에이전트가 행동을 선택 (전이 확률에 따라)
+            # 에이전트가 행동을 선택 
             a = agent.select_action(s)
             # 행동에 따라 에이전트의 행동 실행
             s_prime, r, done = env.step(a)
