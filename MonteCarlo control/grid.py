@@ -3,10 +3,12 @@ import numpy  as np
 
 class Grid():
     def __init__(self):
+        # 에이전트의 상태 초기화
         self.x = 0
         self.y = 0
 
     def step(self, a):
+        # 에이전트의 행동 실행
         if   a == 0:
             self.move_left()
         elif a == 1:
@@ -16,7 +18,9 @@ class Grid():
         elif a == 3:
             self.move_down()
 
+        # 에이전트가 한 번의 행동을 실행할 때마다 보상 -1
         reward = -1
+        # 에이전트가 도착 지점에 돌아갈 경우 done은 True 반환
         done   = self.is_done()
         return (self.x, self.y), reward, done
     
