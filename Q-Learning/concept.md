@@ -1,5 +1,3 @@
-<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} });</script>
-
 #### **\[ Human-level Control through Deep Reinforcement Learning - NATURE\]**
 
 [https://www.nature.com/articles/nature14236](https://www.nature.com/articles/nature14236)
