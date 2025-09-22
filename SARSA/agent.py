@@ -5,8 +5,7 @@ class QAgent():
     def __init__(self):
         self.q_table = np.zeros((5, 7, 4))
         self.epsilon = 0.9
-        self.alpha   = 0.01
-        self.gamma   = 0.2
+        self.alpha   = 0.1
 
     def select_action(self, s):
         x, y = s
@@ -19,14 +18,14 @@ class QAgent():
             action     = np.argmax(action_val)
         return action
     
-    def update_table(self, history):
-        cum_reward = 0
-        for transition in history[::-1]:
-            s, a, r, s_prime = transition
-            x, y             = s
+    def update_table(self, transition):
+        s, a, r, s_prime = transition
+        x, y             = s
+        next_x, next_y   = s_prime
+        a_prime          = self.select_action(s_prime) # 한 차례 미래 상태에서 선택할 액션
 
-            self.q_table[x,y,a] = self.q_table[x,y,a] + self.alpha * (cum_reward - self.q_table[x, y, a])
-            cum_reward = self.gamma * cum_reward + r
+        # SARSA 업데이트 식
+        self.q_table[x,y,a] = self.q_table[x,y,a] + self.alpha * (r + self.q_table[next_x, next_y, a_prime] - self.q_table[x, y, a])
 
     def anneal_epsilon(self):
         self.epsilon -= 0.03

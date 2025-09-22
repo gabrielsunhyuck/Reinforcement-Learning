@@ -11,22 +11,23 @@ def main():
         # 2. grid 인스턴스를 사용하여 환경을 리셋
         s = grid.reset() 
 
-        # 3. 에피소드 기록을 저장할 히스토리 리스트 초기화
-        history = []
         while not done:
-            # 4. agent 인스턴스를 사용하여 메서드를 호출
+            # 3. agent 인스턴스를 사용하여 메서드를 호출
             a = agent.select_action(s)
             s_prime, r, done = grid.step(a)
 
-            # 5. 현재 스텝의 경험을 히스토리에 추가
-            history.append((s, a, r, s_prime))
+            # 4. 현재 스텝의 경험을 transition 튜플로 만듦
+            transition = (s, a, r, s_prime)
+            
+            # 5. 매 스텝마다 Q-테이블을 바로 업데이트 (SARSA 방식)
+            agent.update_table(transition)
+            
             s = s_prime
         
-        # 6. 에피소드가 끝난 후, 전체 히스토리를 이용해 Q-테이블 업데이트
-        agent.update_table(history)
+        # 에피소드가 끝난 후 엡실론 감소
         agent.anneal_epsilon()
 
-    # 7. 학습이 끝난 후 agent 인스턴스의 테이블을 출력합니다.
+    # 6. 학습이 끝난 후 agent 인스턴스의 테이블을 출력
     agent.show_table()
 
 main()
