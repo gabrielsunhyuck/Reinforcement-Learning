@@ -7,6 +7,7 @@ def main():
     model     = Model()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
+    print("Training starts...") # 학습 시작을 알리는 로그 추가
     for step in range(10000):
         # (2) 뉴럴넷 학습은 미니 배치 단위로 이루어짐
         # --> 1만 개의 데이터 중 랜덤하게 32개를 뽑아서 미니 배치로 재구성
@@ -27,5 +28,13 @@ def main():
         loss.mean().backward()
         # 파라미터(w) 업데이트
         optimizer.step()
+        
+        # 1000번에 한 번씩 로그 출력 (선택 사항)
+        if (step+1) % 1000 == 0:
+            print(f"Step {step+1}/10000, Loss: {loss.item():.4f}")
     
+    print("Training finished. Plotting results...")
     plotting(model)
+
+if __name__ == "__main__":
+    main()
